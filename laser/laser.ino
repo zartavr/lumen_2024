@@ -13,6 +13,7 @@ VL53L0X sensor;
 #define BUZ_GPIO 4
 #define BUZ_CH 0
 
+#define HIGH_SPEED
 
 void setup()
 {
@@ -32,22 +33,23 @@ void setup()
     while (1) {}
   }
 
-  // Start continuous back-to-back mode (take readings as
-  // fast as possible).  To use continuous timed mode
-  // instead, provide a desired inter-measurement period in
-  // ms (e.g. sensor.startContinuous(100)).
-  sensor.startContinuous();
+#if defined HIGH_SPEED
+  // reduce timing budget to 20 ms (default is about 33 ms)
+  sensor.setMeasurementTimingBudget(20000);
+#elif defined HIGH_ACCURACY
+  // increase timing budget to 200 ms
+  sensor.setMeasurementTimingBudget(200000);
+#endif
 }
 
 void loop()
 {
-  int distance = sensor.readRangeContinuousMillimeters();
+  int distance = sensor.readRangeSingleMillimeters();
 
-  if (distance < 80){
+  if (distance < 100){
       digitalWrite(LED_GPIO, 1);
       digitalWrite(BUZ_GPIO, 1);
     ledcAttachPin(BUZ_GPIO, BUZ_CH);
-
   }
   else {
       digitalWrite(LED_GPIO, 0);
@@ -56,8 +58,8 @@ void loop()
   }
 
   ledcWriteTone(BUZ_CH, 1000);
-  Serial.print(distance);
-  if (sensor.timeoutOccurred()) { Serial.print(" TIMEOUT"); }
-
-  Serial.println();
+  if (!sensor.timeoutOccurred()) {
+    Serial.println(distance);
+  }
+  delay(200);
 }
