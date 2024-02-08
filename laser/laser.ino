@@ -16,7 +16,7 @@ VL53L0X sensor;
 
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   pinMode(LED_GPIO, OUTPUT);
   pinMode(BUZ_GPIO, OUTPUT);
