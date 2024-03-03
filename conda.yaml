@@ -6,4 +6,3 @@ dependencies:
  - pip>=22
  - pip:
     - -r requirements.txt
-    
