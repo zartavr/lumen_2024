@@ -8,7 +8,9 @@ import matplotlib.pyplot as plt #import matplotlib library
 
 from drawnow import *
 
-arduinoData = serial.Serial('com3', 115200) #Creating our serial object named
+arduinoData = serial.Serial('/dev/ttyUSB0', 115200) #Creating our serial object named
+# arduinoData = serial.Serial('com3', 115200) #Creating our serial object named
+
 
 tempF= []
 plt.ion() #Tell matplotlib you want interactive mode to plot live data
