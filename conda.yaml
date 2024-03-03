@@ -1,0 +1,8 @@
+name: tension-control
+channels:
+  - defaults
+dependencies:
+ - python=3.12
+ - pip>=22
+ - pip:
+    - -r requirements.txt
