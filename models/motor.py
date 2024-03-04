@@ -8,6 +8,9 @@ class Motor:
 
     def set_radius(self, radius: float) -> None:
         self.r = radius
+        
+    def set_velocity(self, velocity) -> None:
+        self.omega = velocity / self.r
 
     def get_velocity(self) -> float:
-        return self.set_radius * self.omega
+        return self.r * self.omega
