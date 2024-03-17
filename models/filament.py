@@ -1,8 +1,7 @@
 class Filament:
-    def __init__(self, support_dist) -> None:
-        self.l = support_dist
+    def __init__(self, length) -> None:
         self.dV = 0
-        self.length = self.l
+        self.length = length
 
     def set_velocity(self, velocity: float, time: int) -> None:
         self.dV = velocity
