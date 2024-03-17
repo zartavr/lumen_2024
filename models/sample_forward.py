@@ -30,7 +30,7 @@ if __name__ == "__main__":
     filament = Filament(2)
     extruder = Motor(0, 0.1)
     winder = Motor(0, 0.1)
-    catenary = Catenary(1, 0, 1.5)
+    catenary = Catenary(2, 0, 2.5)
 
     extruder.set_velocity(0.5)
 
@@ -38,7 +38,7 @@ if __name__ == "__main__":
         time_tick += 1
         if catenary.length >= 18:
             winder.set_velocity(1)
-        if catenary.length <= 2:
+        if catenary.length <= 3:
             winder.set_velocity(0.1)
         delta_velocity = extruder.get_velocity() - winder.get_velocity()
 

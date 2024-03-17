@@ -39,19 +39,19 @@ class Catenary:
     def find_a(self, debug: bool = 0) -> float:
         res = sp.root_scalar(self.__catenary_b, bracket=self.B_BRACKET, method="brentq")
         
-        self.param_a = res.root
+        self.param_a = self.catenary_a(res.root)
 
         if debug:
             print(f"a = {self.catenary_a(res.root)}")
             print(f"iterations: {res.iterations}")
 
             b_x = np.linspace(self.B_BRACKET[0], self.B_BRACKET[1], 1000)
-            b_y = np.array([self.__catenary_b(b) + self.__get_param_eq for b in b_x])
-            param_const = np.array([self.__get_param_eq for b in b_x])
+            b_y = np.array([self.__catenary_b(b) + self.__get_param_eq() for b in b_x])
+            param_const = np.array([self.__get_param_eq() for b in b_x])
 
             plt.figure("a_param")
             plt.plot(b_x, b_y)
             plt.plot(b_x, param_const)
             plt.ylim([0, 10])
             plt.show()
-        return res.root
+        return self.param_a
