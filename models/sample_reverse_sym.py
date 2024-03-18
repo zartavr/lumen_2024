@@ -29,15 +29,15 @@ def makeFig():  # Create a function that makes our desired plot
 if __name__ == "__main__":
     time_tick = 0
 
-    support_len = 1
+    support_len = 1.5
     support_high = 0 # sym condition
-    len0 = 1.5
+    len0 = 2
 
     filament = Filament(len0)
     extruder = Motor(0, 0.1)
     winder = Motor(0, 0.1)
     catenary = Catenary(support_len, support_high, len0)
-    controller = Controller(support_len, support_high)
+    controller = Controller(support_len, support_high, 0.5)
 
     extruder.set_velocity(0.5)
 
@@ -58,7 +58,7 @@ if __name__ == "__main__":
         print(f"param a: {catenary.param_a}", end="\t")
         print()
 
-        N = 100
+        N = 10
 
         catenary_x = np.linspace(-catenary.param_l / 2, catenary.param_l / 2, N)
         catenary_y = np.array(
@@ -74,7 +74,7 @@ if __name__ == "__main__":
         
         print(f"controller", end=":: ")               
         
-        controller.update(catenary.catenary(catenary_x[N//2]))
+        controller.update(catenary.catenary(controller.pos_x))
         
         print(f"v:{controller.get_velocity():.2f}", end="\t")   
         
