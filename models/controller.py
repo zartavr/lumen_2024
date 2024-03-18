@@ -52,7 +52,7 @@ class Controller:
         return c * self.pos_x
 
     def __find_param_a(self, x, y, debug: bool = False):
-        C_BRACKET = [1e-6, 0.83]
+        C_BRACKET = [1e-6, 0.834] # ref https://www.desmos.com/calculator/2kehfhnud9
         
         if debug:
             # print(f"a = {self.__catenary_a(res.root)}")
