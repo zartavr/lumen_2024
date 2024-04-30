@@ -16,6 +16,8 @@ from drawnow import *
 catenary_x = []
 catenary_y = []
 
+controller_x = [-0.5, -0.5]
+controller_y = [-10, 1]
 
 def makeFig():  # Create a function that makes our desired plot
     plt.title("catenary")  # Plot the title
@@ -24,6 +26,7 @@ def makeFig():  # Create a function that makes our desired plot
     plt.ylabel("y")  # Set ylabels
     plt.ylim([-10, 1])
     plt.plot(catenary_x, catenary_y, label="length = {0:.2f}".format(length))
+    plt.plot(controller_x, controller_y, color="black", linewidth=4)
 
 
 if __name__ == "__main__":
@@ -55,10 +58,10 @@ if __name__ == "__main__":
         print(f"len: {length:.2f}", end="\t")
         catenary.set_catenary_length(length)
         catenary.find_a()
-        print(f"param a: {catenary.param_a}", end="\t")
+        print(f"param a: {catenary.param_a:.3f}", end="\t")
         print()
 
-        N = 10
+        N = 50
 
         catenary_x = np.linspace(-catenary.param_l / 2, catenary.param_l / 2, N)
         catenary_y = np.array(
